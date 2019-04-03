@@ -6,12 +6,14 @@ public class Venda {
     private int id_cliente;
     private int id_produto;
     private String data_venda;
-
-    public Venda(int id, int id_cliente, int id_produto, String data_venda) {
+    private int quantidade;
+    
+    public Venda(int id, int id_cliente, int id_produto, String data_venda, int quantidade) {
         this.id = id;
         this.id_cliente = id_cliente;
         this.id_produto = id_produto;
         this.data_venda = data_venda;
+        this.quantidade = quantidade;
     }
 
     public Venda() {
@@ -49,7 +51,15 @@ public class Venda {
         this.data_venda = data_venda;
     }
 
-        
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    
 
 }
 

@@ -41,6 +41,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
                 p.setId(Integer.valueOf(jTid.getText()));
                 p.setNome(jTnomeedit.getText());
                 p.setPreço(Double.valueOf(jTpreçoedit.getText()));
+                p.setPreço(Integer.valueOf(jTQuantidadeedit.getText()));
         
 
                 d.altera(p);
@@ -69,6 +70,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
                     
                     p.setNome(jTnome.getText());
                     p.setPreço(Double.valueOf(jTpreço.getText()));
+                    p.setQuantidade(Integer.valueOf(jTQuantidade.getText()));
                     
                     ProdutoBD d = new ProdutoBD();
 
@@ -89,14 +91,14 @@ public class JFEditarProduto extends javax.swing.JFrame {
     
 
         private boolean verificaDados() {
-        if ((!jTnome.getText().equals("")) && (!jTpreço.getText().equals(""))) {            
+        if ((!jTnome.getText().equals("")) && (!jTpreço.getText().equals("")) && (!jTQuantidade.getText().equals(""))) {            
             return true;
         }
         JOptionPane.showMessageDialog(rootPane, "Dados incompletos.");
         return false;
     }
         private boolean verificaDadosA() {
-        if ((!jTnomeedit.getText().equals("")) && (!jTpreçoedit.getText().equals("")) && (!jTid.getText().equals(""))) {            
+        if ((!jTnomeedit.getText().equals("")) && (!jTpreçoedit.getText().equals("")) && (!jTid.getText().equals("")) && (!jTQuantidadeedit.getText().equals("")) ) {            
             return true;
         }
         JOptionPane.showMessageDialog(rootPane, "Dados incompletos.");
@@ -124,6 +126,8 @@ public class JFEditarProduto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTpreço = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jTQuantidade = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -134,6 +138,8 @@ public class JFEditarProduto extends javax.swing.JFrame {
         jTnomeedit = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTpreçoedit = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTQuantidadeedit = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -159,28 +165,41 @@ public class JFEditarProduto extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Quantidade");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTnome, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTpreço, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTnome, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTpreço, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(jButton2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel8)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jButton2)
+                .addContainerGap()
+                .addComponent(jTQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -198,7 +217,11 @@ public class JFEditarProduto extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTpreço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jButton2)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
@@ -227,12 +250,31 @@ public class JFEditarProduto extends javax.swing.JFrame {
 
         jLabel7.setText("Preço");
 
+        jLabel9.setText("Quantidade");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTnomeedit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jTid, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTQuantidadeedit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -241,21 +283,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel6)))
-                        .addGap(0, 43, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTid, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTnomeedit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(0, 43, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -270,9 +298,13 @@ public class JFEditarProduto extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jButton3))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTQuantidadeedit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -400,6 +432,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         
         jTpreço.setText("");
         jTnome.setText("");
+        jTQuantidade.setText("");
         
     }
 
@@ -407,6 +440,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         
         jTnome.setEditable(false);
         jTpreço.setEditable(false);
+        jTQuantidade.setEditable(false);
     }
 
     
@@ -414,6 +448,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         
         jTpreço.setEditable(true);
         jTnome.setEditable(true);
+        jTQuantidade.setEditable(true);
     }
     
     private void limpaCamposA(){
@@ -421,6 +456,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         jTnomeedit.setText("");
         jTpreçoedit.setText("");
         jTid.setText("");
+        jTQuantidadeedit.setText("");
        
     }
 
@@ -429,6 +465,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         jTnomeedit.setEditable(false);
         jTpreçoedit.setEditable(false);
         jTid.setEditable(false);
+        jTQuantidadeedit.setEditable(false);
     }
 
     
@@ -437,6 +474,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         jTnomeedit.setEditable(true);
         jTpreçoedit.setEditable(true);
         jTid.setEditable(true);
+        jTQuantidadeedit.setEditable(true);
     }
 
     
@@ -456,9 +494,13 @@ public class JFEditarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTQuantidade;
+    private javax.swing.JTextField jTQuantidadeedit;
     private javax.swing.JTextField jTid;
     private javax.swing.JTextField jTnome;
     private javax.swing.JTextField jTnomeedit;

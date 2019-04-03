@@ -15,12 +15,14 @@ public class TransferVenda {
     private String nome_cliente;
     private String produto;
     private String data_venda;
+    private int quantidade;
 
-    public TransferVenda(int id_venda, String nome_cliente, String produto, String data_venda) {
+    public TransferVenda(int id_venda, String nome_cliente, String produto, String data_venda, int quantidade) {
         this.id_venda = id_venda;
         this.nome_cliente = nome_cliente;
         this.produto = produto;
         this.data_venda = data_venda;
+        this.quantidade = quantidade;
     }
 
     public TransferVenda() {
@@ -57,7 +59,13 @@ public class TransferVenda {
     public void setData_venda(String data_venda) {
         this.data_venda = data_venda;
     }
-    
-    
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
     
 }

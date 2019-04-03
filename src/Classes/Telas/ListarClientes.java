@@ -8,8 +8,12 @@ package Classes.Telas;
 import Classes.Cliente;
 import Classes.Persistencia.ClienteBD;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,6 +29,7 @@ public class ListarClientes extends JFrame{
     private JPanel painelFundo;
     private JTable tabela;
     private JScrollPane barraRolagem;
+    private JButton excluir;
 
     private DefaultTableModel modelo = new DefaultTableModel();
  
@@ -35,16 +40,19 @@ public class ListarClientes extends JFrame{
     }
     
      public void criaJanela() {
-
+         
         barraRolagem = new JScrollPane(tabela);
         painelFundo = new JPanel();
         painelFundo.setLayout(new BorderLayout());
         painelFundo.add(BorderLayout.CENTER, barraRolagem);
+        excluir = classeJButton();
+        getContentPane().add(excluir);
+        
  
         getContentPane().add(painelFundo);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(500, 320);
+        setLocation(650, 300);
+        setSize(600, 400);
         setVisible(true);
     }
 
@@ -68,5 +76,61 @@ public class ListarClientes extends JFrame{
         }
     }
         
+    
+    private void excluirRegistro() throws SQLException {
+        // Se algum registro estiver selecionado
+        if (tabela.getSelectedRow() != -1) {
+            // Exibe uma janela de confirmação antes de exluir o registro
+            int resp = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir este registro?",
+                    "Confirmação!", JOptionPane.YES_NO_OPTION);
 
+            // Se a confirmação for SIM
+            if (resp == JOptionPane.YES_NO_OPTION) {
+                // Remove o registro, usando como parâmetro, o id da linha selecionada                
+                ClienteBD c = new ClienteBD();
+                c.remove(pegaIdCliente());
+
+                JOptionPane.showMessageDialog(rootPane, "Registro excluido com sucesso.");
+                JOptionPane.showMessageDialog(rootPane, "Feche a página para atualizar os dados.");
+                                                
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Cliente não selecionado.");
+        }
+    }
+    
+        private int pegaIdCliente() {        
+        int id_Cliente = 0;
+        
+        if (tabela.getSelectedRow() != -1) {           
+            // Salva a posição da linha selecionada na tabela de pesquisa
+            int linhaSelecionada = tabela.getSelectedRow();
+            
+            id_Cliente = (int) tabela.getValueAt(linhaSelecionada, 0);
+        }       
+        return id_Cliente;
+    }
+        
+        public JButton classeJButton(){
+
+	JButton excluir = new JButton();
+	excluir.setText("Excluir");
+	excluir.setSize(100,25);
+	excluir.setLocation(450,300);
+	excluir.setEnabled(true);
+        
+        
+        excluir.addActionListener( new ActionListener() { public void actionPerformed(ActionEvent e) { 
+            try {
+                excluirRegistro();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Registro não pode ser exluído");
+            }
+        } });
+        
+        return excluir;
+        }
+        
+        
 }
+

@@ -5,13 +5,16 @@
  */
 package Classes.Telas;
 
-import Classes.Cliente;
 import Classes.Persistencia.ClienteBD;
 import Classes.Persistencia.ProdutoBD;
 import Classes.Produto;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -42,11 +45,13 @@ public class ListarProdutos extends JFrame{
         painelFundo = new JPanel();
         painelFundo.setLayout(new BorderLayout());
         painelFundo.add(BorderLayout.CENTER, barraRolagem);
+        JButton excluir = classeJButton();
+        getContentPane().add(excluir);
  
         getContentPane().add(painelFundo);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(500, 320);
+        setLocation(650, 300);
+        setSize(600, 400);
         setVisible(true);
     }
 
@@ -54,9 +59,11 @@ public class ListarProdutos extends JFrame{
         tabela = new JTable(modelo);
         modelo.addColumn("Id");
         modelo.addColumn("Nome");
-        modelo.addColumn("Telefone");
+        modelo.addColumn("Preço");
+        modelo.addColumn("Quantidade");
         tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(80);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(80);
         pesquisar(modelo);
     }
@@ -66,8 +73,64 @@ public class ListarProdutos extends JFrame{
         ProdutoBD dao = new ProdutoBD();
  
         for (Produto p : dao.getLista()) {
-            modelo.addRow(new Object[]{p.getId(), p.getNome(), p.getPreço()});
+            modelo.addRow(new Object[]{p.getId(), p.getNome(), p.getPreço(), p.getQuantidade()});
         }
     }
+        
+        
+            
+    private void excluirRegistro() throws SQLException {
+        // Se algum registro estiver selecionado
+        if (tabela.getSelectedRow() != -1) {
+            // Exibe uma janela de confirmação antes de exluir o registro
+            int resp = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir este registro?",
+                    "Confirmação!", JOptionPane.YES_NO_OPTION);
+
+            // Se a confirmação for SIM
+            if (resp == JOptionPane.YES_NO_OPTION) {
+                // Remove o registro, usando como parâmetro, o id da linha selecionada                
+                ProdutoBD p = new ProdutoBD();
+                p.remove(pegaIdProduto());
+
+                JOptionPane.showMessageDialog(rootPane, "Registro excluido com sucesso.");
+                JOptionPane.showMessageDialog(rootPane, "Feche a página para atualizar os dados.");
+                                                
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Produto não selecionado.");
+        }
+    }
+    
+        private int pegaIdProduto() {        
+        int id_Cliente = 0;
+        
+        if (tabela.getSelectedRow() != -1) {           
+            // Salva a posição da linha selecionada na tabela de pesquisa
+            int linhaSelecionada = tabela.getSelectedRow();
+            
+            id_Cliente = (int) tabela.getValueAt(linhaSelecionada, 0);
+        }       
+        return id_Cliente;
+    }
+        
+        public JButton classeJButton(){
+
+	JButton excluir = new JButton();
+	excluir.setText("Excluir");
+	excluir.setSize(100,25);
+	excluir.setLocation(450,300);
+	excluir.setEnabled(true);
+        
+        
+        excluir.addActionListener( new ActionListener() { public void actionPerformed(ActionEvent e) { 
+            try {
+                excluirRegistro();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane, "Registro não pode ser excluido");
+            }
+        } });
+        
+        return excluir;
+        }
     
 }

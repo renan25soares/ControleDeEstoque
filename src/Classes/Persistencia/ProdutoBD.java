@@ -1,6 +1,5 @@
 package Classes.Persistencia;
 
-import Classes.Cliente;
 import Classes.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +18,8 @@ public class ProdutoBD {
         
     public void adicionaProduto(Produto p) throws SQLException {
         // Prepara conexão p/ receber o comando SQL
-        String sql = "INSERT INTO produto(descricao, preco)"
-                + "VALUES(?, ?)";       
+        String sql = "INSERT INTO produto(descricao, preco, quantidade)"
+                + "VALUES(?, ?, ?)";       
         PreparedStatement stmt;
         // stmt recebe o comando SQL
         stmt = this.conexao.prepareStatement(sql);
@@ -28,6 +27,7 @@ public class ProdutoBD {
         // Seta os valores p/ o stmt, substituindo os "?"
         stmt.setString(1, p.getNome());
         stmt.setFloat(2, (float) p.getPreço());
+        stmt.setInt(3, (int) p.getQuantidade());
         
         // O stmt executa o comando SQL no BD, e fecha a conexão
         stmt.execute();
@@ -53,6 +53,7 @@ public class ProdutoBD {
             p.setId(rs.getInt("id_produto"));
             p.setNome(rs.getString("descricao"));
             p.setPreço(rs.getFloat("preco"));
+            p.setQuantidade(rs.getInt("quantidade"));
             
             // Adiciona o registro na lista
             lista.add(p);            
@@ -73,7 +74,7 @@ public class ProdutoBD {
         
         public void altera(Produto p) throws SQLException {
         // Prepara conexão p/ receber o comando SQL
-        String sql = "UPDATE produto set descricao=?, preco=?"
+        String sql = "UPDATE produto set descricao=?, preco=?, quantidade=?"
                 + "WHERE id_produto=?";
         // stmt recebe o comando SQL
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
@@ -81,9 +82,10 @@ public class ProdutoBD {
         // Seta os valores p/ o stmt, substituindo os "?"        
         stmt.setString(1, p.getNome());
         stmt.setString(2, String.valueOf(p.getPreço()));
+        stmt.setString(3, String.valueOf(p.getQuantidade()));
 
         // Usa o ID como parâmetro de comparação no SQL
-        stmt.setInt(3, p.getId());
+        stmt.setInt(4, p.getId());
         
         // O stmt executa o comando SQL no BD, e fecha a conexão
         stmt.execute();

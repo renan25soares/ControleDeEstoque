@@ -1,7 +1,6 @@
 package Classes.Persistencia;
 
 import Classes.TransferVenda;
-import Classes.Venda;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,7 @@ public class TransferVendaBD {
     
             public List<TransferVenda> getLista() throws SQLException{
         // Prepara conexão p/ receber o comando SQL
-        String sql = "select nome, descricao, id, data_venda\n" +
+        String sql = "select nome, descricao, id, data_venda, quantidade\n" +
                      "from cliente, venda, produto p\n" +
                      "where id_cliente = id_clientefk and id_produto = id_produtofk";;
         PreparedStatement stmt = this.conexao.prepareStatement(sql);
@@ -43,13 +42,12 @@ public class TransferVendaBD {
             v.setNome_cliente(rs.getString("nome"));
             v.setProduto(rs.getString("descricao"));
             v.setData_venda(rs.getString("data_venda"));
+            v.setQuantidade(rs.getInt("quantidade"));
             
             // Adiciona o registro na lista
             lista.add(v);
         }
-        
-        
-        
+       
         // Fecha a conexão com o BD
         rs.close();
         stmt.close();
