@@ -25,6 +25,7 @@ public class JFEditarCliente extends javax.swing.JFrame {
         initComponents();
         desabilitaCampos();
         desabilitaCamposE();
+        setResizable(false);
     }
 
     /**

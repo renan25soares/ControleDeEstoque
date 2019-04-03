@@ -30,6 +30,9 @@ public class ListarVendas extends JFrame{
         super("Venda");
         criaJTable();
         criaJanela();
+        setLocationRelativeTo( null );
+        setResizable(false);
+
     }
     
      public void criaJanela() {

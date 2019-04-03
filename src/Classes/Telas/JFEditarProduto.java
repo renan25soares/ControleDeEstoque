@@ -29,6 +29,7 @@ public class JFEditarProduto extends javax.swing.JFrame {
         
         limpaCampos();
         limpaCamposA();
+        setResizable(false);
     }
     
     

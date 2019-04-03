@@ -37,6 +37,9 @@ public class ListarProdutos extends JFrame{
         super("Produto");
         criaJTable();
         criaJanela();
+        setLocationRelativeTo( null );
+        setResizable(false);
+
     }
     
      public void criaJanela() {
@@ -50,7 +53,6 @@ public class ListarProdutos extends JFrame{
  
         getContentPane().add(painelFundo);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocation(650, 300);
         setSize(600, 400);
         setVisible(true);
     }
