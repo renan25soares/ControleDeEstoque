@@ -11,7 +11,7 @@ public class ConexaoBD {
         try {
             Class.forName("org.hsqldb.jdbcDriver");
             System.out.println("Conectando ao banco de dados.");
-            return DriverManager.getConnection("jdbc:hsqldb:C:\\Users\\nhdsd\\OneDrive\\Área de Trabalho\\bd\\estoque", "SA", "");
+            return DriverManager.getConnection("jdbc:hsqldb:C:\\Users\\joser\\OneDrive\\Documentos\\Banco de Dados\\bd\\estoque", "SA", "");
         } catch (ClassNotFoundException e) {
             throw new SQLException(e.getMessage());
         }   
